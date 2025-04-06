@@ -9,6 +9,20 @@ dev:
     @cd client && bun install
     @docker compose up -d
 
+# Shows outdated packages
+outdated:
+    @echo "Server"
+    @cd server && bun outdated
+    @echo "Client"
+    @cd client && bun outdated
+
+# Upgrade outdated packages
+upgrade:
+    @echo "Server"
+    @cd server && bun update
+    @echo "Client"
+    @cd client && bun update
+
 # Build the server code
 build-server:
   @cd server && bun build ./src/index.ts --minify --targte=bun --outfile=../dist/server.js
