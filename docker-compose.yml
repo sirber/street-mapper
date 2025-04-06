@@ -1,6 +1,7 @@
 services:
   client:
     image: oven/bun:alpine
+    container_name: client
     working_dir: /app
     volumes:
       - ./client:/app
@@ -14,6 +15,7 @@ services:
 
   server:
     image: oven/bun:alpine
+    container_name: server
     working_dir: /app
     volumes:
       - ./server:/app

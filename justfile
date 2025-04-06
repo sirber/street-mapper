@@ -29,7 +29,7 @@ upgrade:
 # Build the server code
 build-server:
   @echo "Building server..."
-  @cd server && bun build ./src/index.ts --minify --targte=bun --outfile=../dist/server.js
+  @cd server && bun build ./src/index.ts --minify --target=bun --outfile=../dist/server.js
 
 # Build the client code
 build-client:
