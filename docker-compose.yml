@@ -1,0 +1,38 @@
+services:
+  client:
+    image: oven/bun:alpine
+    working_dir: /app
+    volumes:
+      - ./client:/app
+    command: bun dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - server
+
+  server:
+    image: oven/bun:alpine
+    working_dir: /app
+    volumes:
+      - ./server:/app
+    command: bun run index.js
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/mydatabase
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
