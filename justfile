@@ -38,3 +38,7 @@ build-client:
 
 # Build both server and client
 build: build-server build-client
+
+# Stop comtainers
+stop:
+    @docker compose stop
