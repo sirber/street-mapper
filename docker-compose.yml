@@ -12,7 +12,7 @@ services:
       - "5000:5000"
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://postgres:crm@db:5432/tiny-crm?connection_limit=10
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres?connection_limit=10
     depends_on:
       - db
 
@@ -20,7 +20,7 @@ services:
     image: postgres:17-alpine
     restart: on-failure:5
     environment:
-    - POSTGRES_PASSWORD=crm
+    - POSTGRES_PASSWORD=postgres
     ports:
     - '5432:5432'
     volumes:

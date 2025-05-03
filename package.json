@@ -14,7 +14,9 @@
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
     "test:unit": "vitest",
-    "test": "npm run test:unit -- --run"
+    "test": "npm run test:unit -- --run",
+    "migrate:make": "bunx knex migrate:make --knexfile knexfile.mjs",
+    "migrate:run": "bunx knex migrate:latest --knexfile knexfile.mjs"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.5",
@@ -27,6 +29,8 @@
     "@tailwindcss/vite": "^4.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/svelte": "^5.2.4",
+    "@types/knex": "^0.16.1",
+    "@types/node": "^22.15.3",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-svelte": "^3.0.0",
@@ -42,5 +46,10 @@
     "typescript-eslint": "^8.20.0",
     "vite": "^6.2.6",
     "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "knex": "^3.1.0",
+    "pg": "^8.15.6"
   }
 }
