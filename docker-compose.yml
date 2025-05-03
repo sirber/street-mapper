@@ -1,40 +1,30 @@
-services:
-  client:
-    image: oven/bun:alpine
-    container_name: client
-    working_dir: /app
-    volumes:
-      - ./client:/app
-    command: bun dev
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=development
-    depends_on:
-      - server
+name: street-mapper
 
-  server:
+services:
+  app:
     image: oven/bun:alpine
     container_name: server
     working_dir: /app
     volumes:
-      - ./server:/app
-    command: bun run src/index.ts --watch
+      - ./:/app
+    command: bun run dev --host --port 5000
     ports:
       - "5000:5000"
     environment:
       - NODE_ENV=development
-      - MONGO_URI=mongodb://mongo:27017/mydatabase
+      - DATABASE_URL=postgresql://postgres:crm@db:5432/tiny-crm?connection_limit=10
     depends_on:
-      - mongo
+      - db
 
-  mongo:
-    image: mongo:latest
-    container_name: mongo
+  db:
+    image: postgres:17-alpine
+    restart: on-failure:5
+    environment:
+    - POSTGRES_PASSWORD=crm
     ports:
-      - "27017:27017"
+    - '5432:5432'
     volumes:
-      - mongo-data:/data/db
+      - db_data:/var/lib/postgresql/data
 
 volumes:
-  mongo-data:
+  db_data:
