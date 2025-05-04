@@ -10,8 +10,8 @@ export async function up(knex: Knex): Promise<void> {
 
 	// Create device table
 	await knex.schema.createTable('device', (table) => {
-		table.increments('id').primary();
-		table.uuid('uuid').notNullable().index();
+		table.increments('id').unsigned().primary();
+		table.uuid('external_id').notNullable().index();
 		table.string('name').notNullable();
 		table.timestamp('created_at').defaultTo(knex.fn.now()).notNullable();
 		table.timestamp('updated_at').defaultTo(knex.fn.now()).notNullable();
