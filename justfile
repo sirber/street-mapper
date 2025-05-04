@@ -6,19 +6,23 @@ help:
 # Start a development envidonment
 [group('development')]
 up:
-    @bun install
     @docker compose up -d --wait
-    @docker compose exec -ti app sh -c "chmod +w ./migrations/*"
+    @docker compose exec -t app sh -c "chmod +w ./migrations/*"
 
 # Get bash inside the container
 [group('development')]
 cli:
     @docker compose exec -ti app sh
 
+# Get bash inside the container
+[group('development')]
+test:
+    @docker compose exec -t app bun run test
+
 # Stop comtainers
 [group('development')]
 down:
-    @docker compose stop
+    @docker compose down
 
 # Migrate database
 [group('development')]
