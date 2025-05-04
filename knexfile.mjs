@@ -1,6 +1,5 @@
-// knexfile.mjs
-/** @type {import('knex').Knex.Config} */
 const config = {
+	test: {},
 	development: {
 		client: 'pg',
 		connection: process.env.DATABASE_URL,
@@ -9,7 +8,10 @@ const config = {
 			directory: './migrations',
 			extension: 'ts'
 		}
-	}
+	},
+	production: {}
 };
+
+config.production = config.development;
 
 export default config;
