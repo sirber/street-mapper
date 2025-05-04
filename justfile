@@ -39,14 +39,17 @@ migrate-run:
 # Shows outdated packages
 [group('packages')]
 outdated:
-    @ bun outdated
+    @docker compose exec app \
+        bun outdated
 
 # Upgrade outdated packages
 [group('packages')]
-upgrade:
-    @bun update
+update:
+    @docker compose exec app \
+        bun update
 
 # Build for production
 [group('production')]
 build:
-    @bun run build
+    @docker compose exec app \
+    bun run build
