@@ -7,7 +7,13 @@ help:
 [group('development')]
 up:
     @bun install
-    @docker compose up -d
+    @docker compose up -d --wait
+    @docker compose exec -ti app sh -c "chmod +w ./migrations/*"
+
+# Get bash inside the container
+[group('development')]
+cli:
+    @docker compose exec -ti app sh
 
 # Stop comtainers
 [group('development')]
@@ -38,7 +44,5 @@ upgrade:
 
 # Build for production
 [group('production')]
-build: 
+build:
     @bun run build
-
-
