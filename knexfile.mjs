@@ -1,17 +1,17 @@
-const config = {
-	test: {},
-	development: {
-		client: 'pg',
-		connection: process.env.DATABASE_URL,
-		pool: { min: 2, max: 10 },
-		migrations: {
-			directory: './migrations',
-			extension: 'ts'
-		}
-	},
-	production: {}
+const pg = {
+	client: 'pg',
+	connection: process.env.DATABASE_URL,
+	pool: { min: 2, max: 10 },
+	migrations: {
+		directory: './migrations',
+		extension: 'ts'
+	}
 };
 
-config.production = config.development;
+const config = {
+	test: pg,
+	development: pg,
+	production: pg
+};
 
 export default config;
