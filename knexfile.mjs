@@ -1,5 +1,5 @@
-const pg = {
-	client: 'pg',
+const my = {
+	client: 'mysql2',
 	connection: process.env.DATABASE_URL,
 	pool: { min: 2, max: 10 },
 	migrations: {
@@ -9,9 +9,9 @@ const pg = {
 };
 
 const config = {
-	test: pg,
-	development: pg,
-	production: pg
+	test: my,
+	development: my,
+	production: my
 };
 
 export default config;
