@@ -2,7 +2,7 @@ import { error, json } from '@sveltejs/kit';
 import Papa from 'papaparse';
 import { validate as uuidValidate } from 'uuid';
 import type { RequestHandler } from './$types';
-import { deviceExists } from '../../services/device.service';
+import { deviceExists } from '@/repositories/device.repository';
 
 export const POST: RequestHandler = async ({ request }) => {
 	// Validate device
