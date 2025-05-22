@@ -2,6 +2,7 @@ import { error, json } from '@sveltejs/kit';
 import Papa from 'papaparse';
 import { validate as uuidValidate } from 'uuid';
 import type { RequestHandler } from './$types';
+import { deviceExists } from '../../services/device.service';
 
 export const POST: RequestHandler = async ({ request }) => {
 	// Validate device
@@ -14,7 +15,9 @@ export const POST: RequestHandler = async ({ request }) => {
 		throw error(400, 'Invalid deviceid format');
 	}
 
-	// TODO: validate if known device id
+	if (!deviceExists(deviceId)) {
+		throw error(404, 'Device not found');
+	}
 
 	// Handle upload
 	const contentType = request.headers.get('content-type') ?? '';
@@ -31,19 +34,14 @@ export const POST: RequestHandler = async ({ request }) => {
 	const text = await file.text();
 
 	// parse CSV with PapaParse
-	const { data, errors, meta } = Papa.parse<Record<string, string>>(text, {
-		header: true,
+	const { data, errors } = Papa.parse<Record<string, string>>(text, {
+		header: false,
 		skipEmptyLines: true
 	});
 
 	if (errors.length) {
 		console.error(errors);
 		throw error(400, 'Invalid CSV format');
-	}
-
-	// check that the header row included “deviceid”
-	if (!meta.fields?.includes('deviceid')) {
-		throw error(400, 'Missing deviceid header');
 	}
 
 	// validate UUIDs using uuid package
