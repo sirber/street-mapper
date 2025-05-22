@@ -15,7 +15,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		throw error(400, 'Invalid deviceid format');
 	}
 
-	if (!deviceExists(deviceId)) {
+	if (!(await deviceExists(deviceId))) {
 		throw error(404, 'Device not found');
 	}
 
