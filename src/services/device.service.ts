@@ -1,5 +1,5 @@
-import db from '../libraries/database';
-import type { Device } from '../types/device.type';
+import db from '@/libraries/database';
+import type { Device } from '@/types/device.type';
 
 export async function deviceByID(id: number): Promise<Device | undefined> {
 	return await db<Device>('device').where('id', id).first();
