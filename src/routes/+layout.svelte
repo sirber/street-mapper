@@ -7,7 +7,7 @@
 	<!-- Sidebar: 3/12 -->
 	<div class="col-span-3 flex flex-col border-r border-gray-700">
 		<div class="border-b border-gray-700 p-4">
-			<h1 class="text-xl font-semibold">Sidebar</h1>
+			<h1 class="text-xl font-semibold">Street Mapper 2000</h1>
 		</div>
 		<div class="flex-1 overflow-auto p-4">
 			<slot />
