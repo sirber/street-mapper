@@ -8,6 +8,7 @@ help:
 up:
     @docker compose up -d --wait
     @docker compose exec -t app sh -c "chmod +w ./migrations/*"
+    @open http://localhost:5000
 
 # Get bash inside the container
 [group('development')]
